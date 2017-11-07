@@ -26,6 +26,8 @@ function pickUpPassenger(car){
   console.log("Picked up passenger. Car now has " + car.passengers + " passengers.");
 }
 
+pickUpPassenger(car1);
+
 function getDestination(car){
   if (car.city === 'Toronto'){
     return 'Mississauga';
@@ -56,8 +58,15 @@ function drive(car, cityDistance){
   console.log("Drove to " + car.city + ". Remaining gas: " + getGasDisplay(car.gas) + ".");
 }
 
-drive(car1, 10)
-drive(car1, 20)
+drive(car1, 20);
+
+function dropOffPassengers(car){
+  previousPasengers = car.passengers;
+  car.passengers    = 0;
+  console.log("Dropped off " + previousPasengers + " passengers.");
+}
+
+dropOffPassengers(car1);
 //
 // console.log("Abby is in " + car1.city);
 // console.log("Ari has " + car2.passengers + " passengers");
