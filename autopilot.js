@@ -1,5 +1,6 @@
 "use strict";
 
+var cars = [];
 function getNewCar(){
   var newCar =  {
     "city":       "Toronto",
@@ -9,18 +10,10 @@ function getNewCar(){
   return newCar;
 }
 
-var car1 = getNewCar();
-var car2 = getNewCar();
-
-var cars = [];
-
-function addCar(new_car){
-  cars.push(new_car);
-  console.log("Adding new car to fleet. Fleet size is now " + cars.length + ".");
+function addCar(cars, newCar){
+  cars.push(newCar);
+  return "Adding new car to fleet. Fleet size is now " + cars.length + ".";
 }
-
-addCar(car1);
-addCar(car2);
 
 function pickUpPassenger(car){
   car.passengers += 1;
@@ -92,11 +85,13 @@ function commandFleet(cars){
   console.log("---");
 }
 
-commandFleet(cars);
-//
-// console.log("Abby is in " + car1.city);
-// console.log("Ari has " + car2.passengers + " passengers");
-// car2.passengers += 2
-// console.log("Ari has " + car2.passengers + " passengers");
-// car2.passengers += 2
-// console.log("Ari has " + car2.passengers + " passengers");
+
+function addOneCarPerDay(cars, numDays){
+  for (var number = 0; number < numDays; number++){
+
+    var newCar = getNewCar();
+    console.log(addCar(cars, newCar));
+    commandFleet(cars);
+  }
+}
+addOneCarPerDay(cars, 10);
