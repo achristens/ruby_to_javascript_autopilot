@@ -25,7 +25,7 @@ addCar(car2);
 function pickUpPassenger(car){
   car.passengers += 1;
   car.gas -= 10;
-  console.log("Picked up passenger. Car now has " + car.passengers + " passengers.");
+  return "Picked up passenger. Car now has " + car.passengers + " passengers.";
 }
 
 function getDestination(car){
@@ -41,7 +41,7 @@ function getDestination(car){
 function fillUpGas(car){
   var oldGas = car.gas;
   car.gas = 100;
-  console.log("Filled up to " + getGasDisplay(car.gas) + " on gas from " + getGasDisplay(oldGas) + ".");
+  return "Filled up to " + getGasDisplay(car.gas) + " on gas from " + getGasDisplay(oldGas) + ".";
 }
 
 function getGasDisplay(gasAmount){
@@ -69,24 +69,30 @@ function act(car){
   var distanceBetweenCities = 50;
 
   if (car.gas < 20){
-    fillUpGas(car);
+    return fillUpGas(car);
   } else if (car.passengers < 3) {
-    pickUpPassenger(car);
+    return pickUpPassenger(car);
   } else {
     if (car.gas < distanceBetweenCities){
       return fillUpGas(car);
     }
     var droveTo           = drive(car, distanceBetweenCities);
     var passengersDropped = dropOffPassengers(car);
-    console.log(droveTo + " " + passengersDropped);
+    return droveTo + " " + passengersDropped;
   }
 }
 
-act(car1);
-act(car1);
-act(car1);
-act(car1);
-act(car1);
+function commandFleet(cars){
+  for (var number = 0; number < cars.length; number++){
+    var action = act(cars[number]);
+    var car = number + 1;
+    var results = "Car " + car + ": " + action;
+    console.log(results);
+  }
+  console.log("---");
+}
+
+commandFleet(cars);
 //
 // console.log("Abby is in " + car1.city);
 // console.log("Ari has " + car2.passengers + " passengers");
