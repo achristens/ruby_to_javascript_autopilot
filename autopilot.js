@@ -28,11 +28,11 @@ function pickUpPassenger(car){
 
 function getDestination(car){
   if (car.city === 'Toronto'){
-    'Mississauga';
+    return 'Mississauga';
   } else if (car.city === 'Mississauga') {
-    'London';
+    return 'London';
   } else if (car.city === 'London'){
-    'Toronto';
+    return 'Toronto';
   }
 }
 
@@ -46,8 +46,18 @@ function getGasDisplay(gasAmount){
   return gasAmount + "%";
 }
 
-pickUpPassenger(car1);
-fillUpGas(car1);
+function drive(car, cityDistance){
+  if (car.gas < cityDistance) {
+    return fillUpGas(car);
+  }
+
+  car.city = getDestination(car);
+  car.gas -= cityDistance;
+  console.log("Drove to " + car.city + ". Remaining gas: " + getGasDisplay(car.gas) + ".");
+}
+
+drive(car1, 10)
+drive(car1, 20)
 //
 // console.log("Abby is in " + car1.city);
 // console.log("Ari has " + car2.passengers + " passengers");
